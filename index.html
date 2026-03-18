@@ -9,7 +9,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:#0f172a;font-size:14px}
-.wrap{max-width:900px;margin:0 auto;padding:24px 16px}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 8px}
+.wrap-full{padding:0 16px 24px}
 /* 헤더 */
 .page-header{background:#0f172a;color:#fff;border-radius:12px;padding:28px 32px;margin-bottom:20px}
 .page-header h1{font-size:26px;font-weight:700;margin-bottom:6px}
@@ -33,13 +34,16 @@ body{font-family:'Noto Sans KR',Arial,sans-serif;background:#f0f4f8;color:#0f172
 /* 인사이트 박스 */
 .insight{background:#f0f9ff;border-left:3px solid #0284c7;padding:12px 16px;border-radius:0 8px 8px 0;margin-top:14px;font-size:13px;color:#0f172a;line-height:1.6}
 /* 테이블 */
-.tbl-wrap{overflow-x:auto}
+.tbl-wrap{overflow-x:auto;width:100%}
 table{width:100%;border-collapse:collapse;font-size:13px}
 thead th{background:#0f172a;color:#fff;padding:10px 12px;text-align:center;white-space:nowrap;font-weight:600}
 tbody td{padding:9px 12px;border-bottom:1px solid #f1f5f9;white-space:nowrap;text-align:center}
-tbody td.td-title{white-space:normal;text-align:left;max-width:260px}
+tbody td.td-title{white-space:normal;text-align:left;min-width:280px}
 tbody tr:hover{background:#f8fafc}
 tbody tr.highlight td{background:#eff6ff;font-weight:600}
+/* 링크 */
+.product-link{color:#0f172a;text-decoration:none}
+.product-link:hover{color:#0284c7;text-decoration:underline}
 /* 차트 컨테이너 */
 .chart-box{position:relative;height:260px;margin-bottom:8px}
 .chart-box-sm{position:relative;height:180px}
@@ -63,6 +67,12 @@ tbody tr.highlight td{background:#eff6ff;font-weight:600}
 .sg-파워{background:#fef3c7;color:#92400e}
 .sg-새싹,.sg-씨앗{background:#f1f5f9;color:#475569}
 .sg-묶음{background:#f1f5f9;color:#94a3b8}
+/* 정렬 */
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{background:#1e293b}
+th.sortable::after{content:' ⇅';font-size:10px;opacity:0.5}
+th.sortable.asc::after{content:' ▲';opacity:1}
+th.sortable.desc::after{content:' ▼';opacity:1}
 @media(max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -199,63 +209,65 @@ tbody tr.highlight td{background:#eff6ff;font-weight:600}
   </div>
 </div>
 
-<!-- 7. 상품 목록 (Top 40) -->
+</div><!-- /wrap -->
+
+<!-- 7. 상품 목록 (Top 40) - 전체 너비 -->
+<div class="wrap-full">
 <div class="card">
   <div class="card-title">🛒 상품 목록 (Top 40)</div>
   <div class="tbl-wrap">
     <table>
       <thead>
         <tr>
-          <th>순위</th><th>이미지</th><th>상품명</th><th>카테고리</th><th>판매처</th><th>셀러등급</th><th>판매가</th><th>배송비</th><th>찜</th><th>리뷰</th><th>평점</th><th>등록일</th><th>판매처 수</th>
+          <th class="sortable" data-col="0" data-type="num">순위</th><th>이미지</th><th>상품명</th><th>카테고리</th><th>판매처</th><th>셀러등급</th><th class="sortable" data-col="6" data-type="price">판매가</th><th>배송비</th><th class="sortable" data-col="8" data-type="num">찜</th><th class="sortable" data-col="9" data-type="review">리뷰</th><th class="sortable" data-col="10" data-type="score">평점</th><th class="sortable" data-col="11" data-type="date">등록일</th><th>판매처 수</th>
         </tr>
       </thead>
       <tbody>
-<tr><td class="rank-top">1</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9044000/90440006880.2.jpg"></td><td class="td-title">백온담 국내산 특허 팔꿈치 손목 손 마사지기 팔 골프 테니스 엘보 EMS 저주파 저주파기</td><td>안마기</td><td>백온담</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>159,000원</td><td>무료</td><td>1321</td><td>224건</td><td>4.88점</td><td>2025.12</td><td>1</td></tr>
-<tr><td class="rank-top">2</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9006385/90063858079.6.jpg"></td><td class="td-title">미르닥 손목 저주파 마사지기 EMS 온열 찜질 손목 피로 케어</td><td>안마기</td><td>미르닥</td><td><span class="badge sg-새싹">새싹</span></td><td>69,000원</td><td>무료</td><td>354</td><td>161건</td><td>4.9점</td><td>2025.10</td><td>1</td></tr>
-<tr><td class="rank-top">3</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9047485/90474850217.1.jpg"></td><td class="td-title">카프 휴대용 EMS 저주파 손목 마사지기 미니 손 안마기 KF-EMS02</td><td>안마기</td><td>카프스토어</td><td><span class="badge sg-빅파워">빅파워</span></td><td>24,900원</td><td>무료</td><td>74</td><td>66건</td><td>4.92점</td><td>2026.01</td><td>1</td></tr>
-<tr><td>4</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8915555/89155558780.7.jpg"></td><td class="td-title">머슬아머 저주파 EMS 듀얼 손목 마사지기 손 핸드 팔 안마기 원적외선 근적외선 온열찜질</td><td>안마기</td><td>머슬아머</td><td><span class="badge sg-프리미엄">프리미엄</span></td><td>169,000원</td><td>무료</td><td>917</td><td>384건</td><td>4.89점</td><td>2025.03</td><td>1</td></tr>
-<tr><td>5</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9068706/90687065193.1.jpg"></td><td class="td-title">바로랩 텐스온 손목 마사지기 TENS EMS 손마사지기 미니 핸드마사지기 팔</td><td>안마기</td><td>바로랩 BAROLAB</td><td><span class="badge sg-새싹">새싹</span></td><td>92,900원</td><td>무료</td><td>50</td><td>33건</td><td>4.79점</td><td>2026.02</td><td>1</td></tr>
-<tr><td>6</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5383073/53830735368.9.jpg"></td><td class="td-title">바로랩 텐스온 손목 마사지기 (TENS + EMS 마사지기)</td><td>안마기</td><td>바로랩</td><td><span class="badge sg-파워">파워</span></td><td>89,900원</td><td>3,000원</td><td>181</td><td>외부</td><td>외부</td><td>2025.03</td><td>1</td></tr>
+<tr><td class="rank-top">1</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9044000/90440006880.2.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12895495888" target="_blank" class="product-link">백온담 국내산 특허 팔꿈치 손목 손 마사지기 팔 골프 테니스 엘보 EMS 저주파 저주파기</a></td><td>안마기</td><td>백온담</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>159,000원</td><td>무료</td><td>1321</td><td>224건</td><td>4.88점</td><td>2025.12</td><td>1</td></tr>
+<tr><td class="rank-top">2</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9006385/90063858079.6.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12519347226" target="_blank" class="product-link">미르닥 손목 저주파 마사지기 EMS 온열 찜질 손목 피로 케어</a></td><td>안마기</td><td>미르닥</td><td><span class="badge sg-새싹">새싹</span></td><td>69,000원</td><td>무료</td><td>354</td><td>161건</td><td>4.9점</td><td>2025.10</td><td>1</td></tr>
+<tr><td class="rank-top">3</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9047485/90474850217.1.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12930339225" target="_blank" class="product-link">카프 휴대용 EMS 저주파 손목 마사지기 미니 손 안마기 KF-EMS02</a></td><td>안마기</td><td>카프스토어</td><td><span class="badge sg-빅파워">빅파워</span></td><td>24,900원</td><td>무료</td><td>74</td><td>66건</td><td>4.92점</td><td>2026.01</td><td>1</td></tr>
+<tr><td>4</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8915555/89155558780.7.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/11611048374" target="_blank" class="product-link">머슬아머 저주파 EMS 듀얼 손목 마사지기 손 핸드 팔 안마기 원적외선 근적외선 온열찜질</a></td><td>안마기</td><td>머슬아머</td><td><span class="badge sg-프리미엄">프리미엄</span></td><td>169,000원</td><td>무료</td><td>917</td><td>384건</td><td>4.89점</td><td>2025.03</td><td>1</td></tr>
+<tr><td>5</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9068706/90687065193.1.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/13142554101" target="_blank" class="product-link">바로랩 텐스온 손목 마사지기 TENS EMS 손마사지기 미니 핸드마사지기 팔</a></td><td>안마기</td><td>바로랩 BAROLAB</td><td><span class="badge sg-새싹">새싹</span></td><td>92,900원</td><td>무료</td><td>50</td><td>33건</td><td>4.79점</td><td>2026.02</td><td>1</td></tr>
+<tr><td>6</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5383073/53830735368.9.jpg"></td><td class="td-title"><a href="https://baro-lab.com/product/detail.html?product_no=26&cate_no=56&display_group=1&cafe_mkt=naver_ks&mkt_in=Y&ghost_mall_id=naver&ref=naver_open" target="_blank" class="product-link">바로랩 텐스온 손목 마사지기 (TENS + EMS 마사지기)</a></td><td>안마기</td><td>바로랩</td><td><span class="badge sg-파워">파워</span></td><td>89,900원</td><td>3,000원</td><td>181</td><td>외부</td><td>외부</td><td>2025.03</td><td>1</td></tr>
 <tr><td>7</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5891789/58917894236.20260213205047.jpg"></td><td class="td-title">어게인 손목 EMS 마사지기 손목안마기 무선 안마기 저주파 손 마사지기</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>19,920원</td><td>묶음</td><td>3</td><td>12건</td><td>4.5점</td><td>2026.02</td><td>2</td></tr>
 <tr><td>8</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5887825/58878257920.20260210191939.jpg"></td><td class="td-title">CAS AirHEAT 손목마사지기 EMS 무선 저주파 손목안마 온열찜질기 CAS-LM01</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>59,900원</td><td>묶음</td><td>5</td><td>6건</td><td>5점</td><td>2026.02</td><td>7</td></tr>
-<tr><td>9</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9045834/90458347581.2.jpg"></td><td class="td-title">온아워 손목 마사지기 EMS 저주파 온열 찜질 손마사지기 손목 안마기 핸드 팔 미니 휴대용</td><td>안마기</td><td>온아워 공식스토어</td><td><span class="badge sg-빅파워">빅파워</span></td><td>34,900원</td><td>무료</td><td>379</td><td>179건</td><td>4.76점</td><td>2026.01</td><td>1</td></tr>
-<tr><td>10</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9053413/90534132520.3.jpg"></td><td class="td-title">바리바디 손목 마사지기 TENS EMS 온열 기능 무선 마사지기</td><td>안마기</td><td>바리바디-barybody</td><td><span class="badge sg-빅파워">빅파워</span></td><td>89,000원</td><td>무료</td><td>395</td><td>171건</td><td>4.84점</td><td>2026.01</td><td>1</td></tr>
-<tr><td>11</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9061236/90612369249.1.jpg"></td><td class="td-title">손목 EMS 마사지기 손목안마기 저주파 무선 안마기 손마사지기</td><td>안마기</td><td>매직씨엔씨</td><td><span class="badge sg-파워">파워</span></td><td>19,920원</td><td>무료</td><td>13</td><td>4건</td><td>4.25점</td><td>2026.02</td><td>1</td></tr>
-<tr><td>12</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8952855/89528559937.jpg"></td><td class="td-title">아이리버 EMS 손목 온열 마사지기 IHC-WR010 임산부 부모님 명절선물</td><td>안마기</td><td>엠씨엘코리아</td><td><span class="badge sg-새싹">새싹</span></td><td>43,900원</td><td>무료</td><td>49</td><td>22건</td><td>4.95점</td><td>2025.06</td><td>1</td></tr>
-<tr><td>13</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9063537/90635373223.1.jpg"></td><td class="td-title">손목마사지기 EMS 저주파 마사지 손목 안마기계 스트레칭 지압 네이비</td><td>안마기</td><td>N프리미엄샵</td><td><span class="badge sg-파워">파워</span></td><td>24,900원</td><td>무료</td><td>12</td><td>13건</td><td>5점</td><td>2026.02</td><td>1</td></tr>
-<tr><td>14</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5859960/58599601911.jpg"></td><td class="td-title">한경희 테라펄스 한담 4in1 손목 마사지기 HJH-WM300 공기압 EMS 근적외선 온열</td><td>안마기</td><td>G마켓</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>102,460원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2026.01</td><td>1</td></tr>
-<tr><td>15</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8688994/86889948056.10.jpg"></td><td class="td-title">손목 마사지기 손 전기 저주파 안마기 손가락 EMS 힐스냅</td><td>안마기</td><td>심시즌</td><td><span class="badge sg-씨앗">씨앗</span></td><td>109,000원</td><td>무료</td><td>268</td><td>268건</td><td>4.88점</td><td>2023.10</td><td>1</td></tr>
-<tr><td>16</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8757097/87570973676.1.jpg"></td><td class="td-title">[브람스] EMS트레이닝 저주파 손목마사지기 발목 안마기 조인트가드 보호대 BM-1100</td><td>안마기</td><td>브람스안마의자</td><td><span class="badge sg-빅파워">빅파워</span></td><td>39,800원</td><td>무료</td><td>22</td><td>59건</td><td>4.8점</td><td>2024.04</td><td>1</td></tr>
-<tr><td>17</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9067755/90677554232.jpg"></td><td class="td-title">비타그램 저주파 손목 마사지기 힐링펄스 EMS 온열 손목안마기 VG-WR2503</td><td>안마기</td><td>르가브호슈</td><td><span class="badge sg-씨앗">씨앗</span></td><td>51,900원</td><td>무료</td><td>1</td><td>-</td><td>-</td><td>2026.02</td><td>1</td></tr>
-<tr><td>18</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5585803/55858033557.jpg"></td><td class="td-title">DDJJ 저주파 손목마사지기 ems 무선 손목안마 온열찜질기 충전식 블랙</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>35,000원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.07</td><td>1</td></tr>
-<tr><td>19</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9027336/90273362290.jpg"></td><td class="td-title">단다니 저주파 원적외선 손목마사지기 온열 찜질 EMS 손 마사지 안마기</td><td>안마기</td><td>단다니몰</td><td><span class="badge sg-빅파워">빅파워</span></td><td>34,800원</td><td>무료</td><td>72</td><td>77건</td><td>4.71점</td><td>2025.11</td><td>1</td></tr>
-<tr><td>20</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8295596/82955968137.2.jpg"></td><td class="td-title">홍진영의 브람스 EMS트레이닝 저주파 손목마사지기 발목 안마기 조인트가드 보호대 BM-1100</td><td>안마기</td><td>이로웰</td><td><span class="badge sg-씨앗">씨앗</span></td><td>39,800원</td><td>무료</td><td>47</td><td>492건</td><td>4.74점</td><td>2023.10</td><td>1</td></tr>
-<tr><td>21</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8964729/89647296410.3.jpg"></td><td class="td-title">[아뉴핏] 수근관 완화기 EMS 저주파 수부완화기 손목마사지기</td><td>안마기</td><td>홈스프링</td><td><span class="badge sg-새싹">새싹</span></td><td>109,000원</td><td>무료</td><td>227</td><td>53건</td><td>4.81점</td><td>2025.07</td><td>1</td></tr>
-<tr><td>22</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8330144/83301445559.jpg"></td><td class="td-title">닥터 몬스터 저주파 EMS 손목 마사지기(손목 마사저+호스트기+충전케이블)</td><td>안마기</td><td>닥터몬스터</td><td><span class="badge sg-씨앗">씨앗</span></td><td>96,000원</td><td>무료</td><td>30</td><td>92건</td><td>4.85점</td><td>2023.10</td><td>1</td></tr>
-<tr><td>23</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5757951/57579514375.8.jpg"></td><td class="td-title">SOVI저주파 마사지기 EMS/TENS 무선본체 4개 + 젤 패드 4세트</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>42,000원</td><td>무료</td><td>1</td><td>외부</td><td>외부</td><td>2025.11</td><td>1</td></tr>
-<tr><td>24</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9048426/90484268270.jpg"></td><td class="td-title">리유 릴리프 밴드 (EMS 손목 전용 마사지기)</td><td>안마기</td><td>리유 코스메틱</td><td><span class="badge sg-파워">파워</span></td><td>69,900원</td><td>3,000원</td><td>1</td><td>-</td><td>-</td><td>2026.01</td><td>1</td></tr>
-<tr><td>25</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5823737/58237376881.4.jpg"></td><td class="td-title">PERFFIER 레드라이트 온열 찜질 저주파 손목 마사지기 EMS 무선</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>29,800원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.12</td><td>1</td></tr>
-<tr><td>26</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5463625/54636253410.1.jpg"></td><td class="td-title">오아 히트스팟W 미니 손목 무선 EMS 저주파 마사지기</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>34,900원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.05</td><td>1</td></tr>
+<tr><td>9</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9045834/90458347581.2.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12913836589" target="_blank" class="product-link">온아워 손목 마사지기 EMS 저주파 온열 찜질 손마사지기 손목 안마기 핸드 팔 미니 휴대용</a></td><td>안마기</td><td>온아워 공식스토어</td><td><span class="badge sg-빅파워">빅파워</span></td><td>34,900원</td><td>무료</td><td>379</td><td>179건</td><td>4.76점</td><td>2026.01</td><td>1</td></tr>
+<tr><td>10</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9053413/90534132520.3.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12989621428" target="_blank" class="product-link">바리바디 손목 마사지기 TENS EMS 온열 기능 무선 마사지기</a></td><td>안마기</td><td>바리바디-barybody</td><td><span class="badge sg-빅파워">빅파워</span></td><td>89,000원</td><td>무료</td><td>395</td><td>171건</td><td>4.84점</td><td>2026.01</td><td>1</td></tr>
+<tr><td>11</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9061236/90612369249.1.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/13067858157" target="_blank" class="product-link">손목 EMS 마사지기 손목안마기 저주파 무선 안마기 손마사지기</a></td><td>안마기</td><td>매직씨엔씨</td><td><span class="badge sg-파워">파워</span></td><td>19,920원</td><td>무료</td><td>13</td><td>4건</td><td>4.25점</td><td>2026.02</td><td>1</td></tr>
+<tr><td>12</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8952855/89528559937.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/11984049249" target="_blank" class="product-link">아이리버 EMS 손목 온열 마사지기 IHC-WR010 임산부 부모님 명절선물</a></td><td>안마기</td><td>엠씨엘코리아</td><td><span class="badge sg-새싹">새싹</span></td><td>43,900원</td><td>무료</td><td>49</td><td>22건</td><td>4.95점</td><td>2025.06</td><td>1</td></tr>
+<tr><td>13</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9063537/90635373223.1.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/13090862131" target="_blank" class="product-link">손목마사지기 EMS 저주파 마사지 손목 안마기계 스트레칭 지압 네이비</a></td><td>안마기</td><td>N프리미엄샵</td><td><span class="badge sg-파워">파워</span></td><td>24,900원</td><td>무료</td><td>12</td><td>13건</td><td>5점</td><td>2026.02</td><td>1</td></tr>
+<tr><td>14</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5859960/58599601911.jpg"></td><td class="td-title"><a href="https://link.gmarket.co.kr/gate/pcs?item-no=4652510807&sub-id=1003&service-code=10000003&lcd=100000083" target="_blank" class="product-link">한경희 테라펄스 한담 4in1 손목 마사지기 HJH-WM300 공기압 EMS 근적외선 온열</a></td><td>안마기</td><td>G마켓</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>102,460원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2026.01</td><td>1</td></tr>
+<tr><td>15</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8688994/86889948056.10.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/9345447733" target="_blank" class="product-link">손목 마사지기 손 전기 저주파 안마기 손가락 EMS 힐스냅</a></td><td>안마기</td><td>심시즌</td><td><span class="badge sg-씨앗">씨앗</span></td><td>109,000원</td><td>무료</td><td>268</td><td>268건</td><td>4.88점</td><td>2023.10</td><td>1</td></tr>
+<tr><td>16</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8757097/87570973676.1.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/10026471240" target="_blank" class="product-link">[브람스] EMS트레이닝 저주파 손목마사지기 발목 안마기 조인트가드 보호대 BM-1100</a></td><td>안마기</td><td>브람스안마의자</td><td><span class="badge sg-빅파워">빅파워</span></td><td>39,800원</td><td>무료</td><td>22</td><td>59건</td><td>4.8점</td><td>2024.04</td><td>1</td></tr>
+<tr><td>17</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9067755/90677554232.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/13133043140" target="_blank" class="product-link">비타그램 저주파 손목 마사지기 힐링펄스 EMS 온열 손목안마기 VG-WR2503</a></td><td>안마기</td><td>르가브호슈</td><td><span class="badge sg-씨앗">씨앗</span></td><td>51,900원</td><td>무료</td><td>1</td><td>-</td><td>-</td><td>2026.02</td><td>1</td></tr>
+<tr><td>18</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5585803/55858033557.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8552997419&ctag=8552997419&lptag=I25949605269&itemId=25949605269&vendorItemId=92932512939&spec=10305198" target="_blank" class="product-link">DDJJ 저주파 손목마사지기 ems 무선 손목안마 온열찜질기 충전식 블랙</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>35,000원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.07</td><td>1</td></tr>
+<tr><td>19</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9027336/90273362290.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12728851349" target="_blank" class="product-link">단다니 저주파 원적외선 손목마사지기 온열 찜질 EMS 손 마사지 안마기</a></td><td>안마기</td><td>단다니몰</td><td><span class="badge sg-빅파워">빅파워</span></td><td>34,800원</td><td>무료</td><td>72</td><td>77건</td><td>4.71점</td><td>2025.11</td><td>1</td></tr>
+<tr><td>20</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8295596/82955968137.2.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/5411474375" target="_blank" class="product-link">홍진영의 브람스 EMS트레이닝 저주파 손목마사지기 발목 안마기 조인트가드 보호대 BM-1100</a></td><td>안마기</td><td>이로웰</td><td><span class="badge sg-씨앗">씨앗</span></td><td>39,800원</td><td>무료</td><td>47</td><td>492건</td><td>4.74점</td><td>2023.10</td><td>1</td></tr>
+<tr><td>21</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8964729/89647296410.3.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12102785705" target="_blank" class="product-link">[아뉴핏] 수근관 완화기 EMS 저주파 수부완화기 손목마사지기</a></td><td>안마기</td><td>홈스프링</td><td><span class="badge sg-새싹">새싹</span></td><td>109,000원</td><td>무료</td><td>227</td><td>53건</td><td>4.81점</td><td>2025.07</td><td>1</td></tr>
+<tr><td>22</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8330144/83301445559.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/5756946145" target="_blank" class="product-link">닥터 몬스터 저주파 EMS 손목 마사지기(손목 마사저+호스트기+충전케이블)</a></td><td>안마기</td><td>닥터몬스터</td><td><span class="badge sg-씨앗">씨앗</span></td><td>96,000원</td><td>무료</td><td>30</td><td>92건</td><td>4.85점</td><td>2023.10</td><td>1</td></tr>
+<tr><td>23</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5757951/57579514375.8.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9024299506&ctag=9024299506&lptag=I26463007466&itemId=26463007466&vendorItemId=93438272811&spec=10305198" target="_blank" class="product-link">SOVI저주파 마사지기 EMS/TENS 무선본체 4개 + 젤 패드 4세트</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>42,000원</td><td>무료</td><td>1</td><td>외부</td><td>외부</td><td>2025.11</td><td>1</td></tr>
+<tr><td>24</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9048426/90484268270.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12939757260" target="_blank" class="product-link">리유 릴리프 밴드 (EMS 손목 전용 마사지기)</a></td><td>안마기</td><td>리유 코스메틱</td><td><span class="badge sg-파워">파워</span></td><td>69,900원</td><td>3,000원</td><td>1</td><td>-</td><td>-</td><td>2026.01</td><td>1</td></tr>
+<tr><td>25</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5823737/58237376881.4.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9227540731&ctag=9227540731&lptag=I27274589729&itemId=27274589729&vendorItemId=94725256442&spec=10305198" target="_blank" class="product-link">PERFFIER 레드라이트 온열 찜질 저주파 손목 마사지기 EMS 무선</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>29,800원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.12</td><td>1</td></tr>
+<tr><td>26</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5463625/54636253410.1.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=1680547683&ctag=1680547683&lptag=l327628752893&itemId=33272698578&vendorItemId=90448054271&spec=10305197" target="_blank" class="product-link">오아 히트스팟W 미니 손목 무선 EMS 저주파 마사지기</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>34,900원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.05</td><td>1</td></tr>
 <tr><td>27</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5702573/57025730497.20251001184147.jpg"></td><td class="td-title">페인바이 100hz 속근 저주파기 팔꿈치 손목 손가락 전용 EMS 마사지기</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>149,000원</td><td>묶음</td><td>1</td><td>62건</td><td>4.44점</td><td>2025.10</td><td>3</td></tr>
-<tr><td>28</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5885900/58859002789.2.jpg"></td><td class="td-title">한경희생활과학 테라펄스 4 in 1 공기압 저주파 EMS 온열 근적외선 손목 마사지기</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>78,000원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2026.02</td><td>1</td></tr>
-<tr><td>29</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9055489/90554890049.jpg"></td><td class="td-title">[1+1 SET] 온아워 EMS 저주파 온열 손목 마사지기 2개 세트</td><td>안마기</td><td>온아워 공식스토어</td><td><span class="badge sg-빅파워">빅파워</span></td><td>64,800원</td><td>무료</td><td>18</td><td>14건</td><td>4.71점</td><td>2026.01</td><td>1</td></tr>
+<tr><td>28</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5885900/58859002789.2.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=2297574832&ctag=2297574832&lptag=l829727627635&itemId=76263275789&vendorItemId=94333651591&spec=10305197" target="_blank" class="product-link">한경희생활과학 테라펄스 4 in 1 공기압 저주파 EMS 온열 근적외선 손목 마사지기</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>78,000원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2026.02</td><td>1</td></tr>
+<tr><td>29</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9055489/90554890049.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/13010378957" target="_blank" class="product-link">[1+1 SET] 온아워 EMS 저주파 온열 손목 마사지기 2개 세트</a></td><td>안마기</td><td>온아워 공식스토어</td><td><span class="badge sg-빅파워">빅파워</span></td><td>64,800원</td><td>무료</td><td>18</td><td>14건</td><td>4.71점</td><td>2026.01</td><td>1</td></tr>
 <tr><td>30</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5280306/52803062051.20250205093159.jpg"></td><td class="td-title">발락 EMS 손목 저주파 아대 단품 리모컨 본체 미포함</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>27,230원</td><td>묶음</td><td>0</td><td>1건</td><td>5점</td><td>2025.02</td><td>6</td></tr>
-<tr><td>31</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5861756/58617561838.jpg"></td><td class="td-title">카프 초슬림 밀착 EMS + TENS 손목마사지기 아이보리 KF-EMS02</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>24,900원</td><td>무료</td><td>1</td><td>외부</td><td>외부</td><td>2026.01</td><td>1</td></tr>
-<tr><td>32</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8923755/89237557293.2.jpg"></td><td class="td-title">레터치 EMS 저주파 손목 보호대 마사지기 손목 온열 찜질기 테크러브</td><td>안마기</td><td>welltech</td><td><span class="badge sg-새싹">새싹</span></td><td>49,000원</td><td>무료</td><td>135</td><td>32건</td><td>4.78점</td><td>2025.04</td><td>1</td></tr>
-<tr><td>33</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5800160/58001603777.4.jpg"></td><td class="td-title">CozyTemp ems 팔꿈치 마사지기 손목 저주파 무선 그레이</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>29,800원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.12</td><td>1</td></tr>
-<tr><td>34</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9052237/90522377791.jpg"></td><td class="td-title">카프 EMS 손목 안마기 근육 마사지기 홈 케어 밴드형 데일리 간편 소형 피로</td><td>안마기</td><td>KMSHOP</td><td><span class="badge sg-파워">파워</span></td><td>34,900원</td><td>무료</td><td>2</td><td>-</td><td>-</td><td>2026.01</td><td>1</td></tr>
-<tr><td>35</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5861561/58615610796.jpg"></td><td class="td-title">카프 초슬림 밀착 EMS + TENS 손목마사지기 네이비 KF-EMS02</td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>24,900원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2026.01</td><td>1</td></tr>
-<tr><td>36</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5727757/57277577994.5.jpg"></td><td class="td-title">미베러 쿨손목 손목마사지기 (공기압+EMS+온열+근적외선)</td><td>안마기</td><td>미베러</td><td><span class="badge sg-씨앗">씨앗</span></td><td>109,800원</td><td>무료</td><td>14</td><td>외부</td><td>외부</td><td>2025.10</td><td>1</td></tr>
+<tr><td>31</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5861756/58617561838.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9311829342&ctag=9311829342&lptag=I27592831847&itemId=27592831847&vendorItemId=94556310460&spec=10305197" target="_blank" class="product-link">카프 초슬림 밀착 EMS + TENS 손목마사지기 아이보리 KF-EMS02</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>24,900원</td><td>무료</td><td>1</td><td>외부</td><td>외부</td><td>2026.01</td><td>1</td></tr>
+<tr><td>32</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8923755/89237557293.2.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/11693046785" target="_blank" class="product-link">레터치 EMS 저주파 손목 보호대 마사지기 손목 온열 찜질기 테크러브</a></td><td>안마기</td><td>welltech</td><td><span class="badge sg-새싹">새싹</span></td><td>49,000원</td><td>무료</td><td>135</td><td>32건</td><td>4.78점</td><td>2025.04</td><td>1</td></tr>
+<tr><td>33</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5800160/58001603777.4.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9146219673&ctag=9146219673&lptag=I26926893333&itemId=26926893333&vendorItemId=93896139074&spec=10305198" target="_blank" class="product-link">CozyTemp ems 팔꿈치 마사지기 손목 저주파 무선 그레이</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>29,800원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2025.12</td><td>1</td></tr>
+<tr><td>34</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_9052237/90522377791.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/12977866781" target="_blank" class="product-link">카프 EMS 손목 안마기 근육 마사지기 홈 케어 밴드형 데일리 간편 소형 피로</a></td><td>안마기</td><td>KMSHOP</td><td><span class="badge sg-파워">파워</span></td><td>34,900원</td><td>무료</td><td>2</td><td>-</td><td>-</td><td>2026.01</td><td>1</td></tr>
+<tr><td>35</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5861561/58615610796.jpg"></td><td class="td-title"><a href="https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9311829342&ctag=9311829342&lptag=I27595779285&itemId=27595779285&vendorItemId=94559166890&spec=10305197" target="_blank" class="product-link">카프 초슬림 밀착 EMS + TENS 손목마사지기 네이비 KF-EMS02</a></td><td>안마기</td><td>쿠팡</td><td><span class="badge sg-플래티넘">플래티넘</span></td><td>24,900원</td><td>무료</td><td>0</td><td>외부</td><td>외부</td><td>2026.01</td><td>1</td></tr>
+<tr><td>36</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5727757/57277577994.5.jpg"></td><td class="td-title"><a href="https://mebetter.co.kr/product/detail.html?product_no=36&cate_no=52&display_group=1&cafe_mkt=naver_ks&mkt_in=Y&ghost_mall_id=naver&ref=naver_open" target="_blank" class="product-link">미베러 쿨손목 손목마사지기 (공기압+EMS+온열+근적외선)</a></td><td>안마기</td><td>미베러</td><td><span class="badge sg-씨앗">씨앗</span></td><td>109,800원</td><td>무료</td><td>14</td><td>외부</td><td>외부</td><td>2025.10</td><td>1</td></tr>
 <tr><td>37</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5816496/58164967498.20251218215503.jpg"></td><td class="td-title">88그로스 EMS 저주파 손목 안마 마사지기 온열찜질기 무선</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>22,310원</td><td>묶음</td><td>0</td><td>-</td><td>-</td><td>2025.12</td><td>3</td></tr>
-<tr><td>38</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8799853/87998538723.jpg"></td><td class="td-title">[쿠닥터] 손목용관리기 ems 저주파 손목 마사지 손바닥 팔 수부전용관리기</td><td>안마기</td><td>쿠닥터</td><td><span class="badge sg-씨앗">씨앗</span></td><td>138,000원</td><td>3,000원</td><td>65</td><td>117건</td><td>4.77점</td><td>2024.06</td><td>1</td></tr>
+<tr><td>38</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_8799853/87998538723.jpg"></td><td class="td-title"><a href="https://smartstore.naver.com/main/products/10454033546" target="_blank" class="product-link">[쿠닥터] 손목용관리기 ems 저주파 손목 마사지 손바닥 팔 수부전용관리기</a></td><td>안마기</td><td>쿠닥터</td><td><span class="badge sg-씨앗">씨앗</span></td><td>138,000원</td><td>3,000원</td><td>65</td><td>117건</td><td>4.77점</td><td>2024.06</td><td>1</td></tr>
 <tr><td>39</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5906835/59068351443.20260226201206.jpg"></td><td class="td-title">스마트 EMS 손목 마사지기 전기 온열 물리 안마 보호대 가정용</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>48,390원</td><td>묶음</td><td>0</td><td>-</td><td>-</td><td>2026.02</td><td>3</td></tr>
 <tr><td>40</td><td><img class="product-img" src="https://shopping-phinf.pstatic.net/main_5866011/58660110488.20260127072054.jpg"></td><td class="td-title">카스 CAS AirHEAT 손목마사지기 EMS 저주파 손목안마 온열찜질기 CAS-LM01</td><td>안마기</td><td>묶음</td><td><span class="badge sg-묶음">묶음</span></td><td>65,710원</td><td>묶음</td><td>2</td><td>-</td><td>-</td><td>2026.01</td><td>2</td></tr>
       </tbody>
     </table>
   </div>
 </div>
-
-</div><!-- /wrap -->
+</div><!-- /wrap-full -->
 
 <script>
 // 트렌드 차트
@@ -324,6 +336,41 @@ new Chart(document.getElementById('dayChart'),{
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},datalabels:{anchor:'end',align:'top',color:'#475569',font:{size:10},formatter:v=>v+'%'}},scales:{y:{display:false},x:{grid:{display:false},ticks:{color:'#64748b'}}}},
   plugins:[ChartDataLabels]
 });
+
+// 상품 목록 정렬
+(function(){
+  const parseVal = (text, type) => {
+    const t = text.trim();
+    if(t==='-'||t==='외부'||t==='묶음') return -Infinity;
+    if(type==='num') return parseFloat(t.replace(/,/g,''))||0;
+    if(type==='price') return parseFloat(t.replace(/[,원]/g,''))||0;
+    if(type==='review') return parseFloat(t.replace(/[,건]/g,''))||0;
+    if(type==='score') return parseFloat(t.replace('점',''))||0;
+    if(type==='date') return t; // YYYY.MM lexicographic
+    return t;
+  };
+  let sortCol = null, sortDir = 1;
+  document.querySelectorAll('th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = parseInt(th.dataset.col);
+      const type = th.dataset.type;
+      if(sortCol===col){ sortDir*=-1; } else { sortCol=col; sortDir=1; }
+      document.querySelectorAll('th.sortable').forEach(h=>h.classList.remove('asc','desc'));
+      th.classList.add(sortDir===1?'asc':'desc');
+      const tbody = th.closest('table').querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a,b)=>{
+        const aVal = parseVal(a.querySelectorAll('td')[col].innerText, type);
+        const bVal = parseVal(b.querySelectorAll('td')[col].innerText, type);
+        if(aVal===bVal) return 0;
+        if(aVal===-Infinity) return 1;
+        if(bVal===-Infinity) return -1;
+        return aVal>bVal ? sortDir : -sortDir;
+      });
+      rows.forEach(r=>tbody.appendChild(r));
+    });
+  });
+})();
 </script>
 </body>
 </html>
